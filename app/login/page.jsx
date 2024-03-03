@@ -2,6 +2,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
   return (
@@ -12,7 +13,7 @@ const LoginPage = () => {
           Sign in to your account using one of the methods below:
         </p>
         <button
-          onClick={() => {}}
+          onClick={() => signIn("google")}
           className="bg-blue-500 text-white text-center w-full py-4 flex gap-2 items-center justify-center"
         >
           <FontAwesomeIcon icon={faGoogle} className="w-4" />
