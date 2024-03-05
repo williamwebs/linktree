@@ -4,9 +4,10 @@ import { redirect } from "next/navigation";
 
 export default function Home() {
   const session = getServerSession();
+  console.log(session);
 
   // redirect if there is a session
-  // if (session) redirect("/account");
+  if (session) redirect("/account");
 
   return (
     <main>
