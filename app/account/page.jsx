@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import UsernameForm from "@/components/form/UsernameForm";
+import { Page } from "@/models/Page";
 
 const AccountPage = async ({ searchParams }) => {
   const session = await getServerSession(authOptions);
@@ -10,7 +11,13 @@ const AccountPage = async ({ searchParams }) => {
 
   // protecting the route
   if (!session) {
-    redirect("/");
+    return redirect("/");
+  }
+
+  const page = await Page.findOne({ owner: session?.user?.email });
+
+  if (page) {
+    return <div>Your page is /{page.uri}</div>;
   }
 
   return (
