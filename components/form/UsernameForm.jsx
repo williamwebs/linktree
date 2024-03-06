@@ -3,10 +3,10 @@
 import { useState } from "react";
 import grabUsername from "@/actions/grabUsername";
 import { redirect } from "next/navigation";
+import SubmitButton from "../buttons/SubmitButton";
 
 const UsernameForm = ({ username }) => {
   const [taken, setTaken] = useState(false);
-
 
   // handle form submit
   const handleFormSubmit = async (formData) => {
@@ -41,9 +41,9 @@ const UsernameForm = ({ username }) => {
           </div>
         )}
 
-        <button type="submit" className="w-full p-2 bg-blue-500 text-white">
-          Claim your username
-        </button>
+        <SubmitButton>
+          <span>Claim your username</span>
+        </SubmitButton>
       </div>
     </form>
   );

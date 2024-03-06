@@ -3,13 +3,11 @@
 import { Page } from "@/models/Page";
 import { getServerSession } from "next-auth";
 import mongoose from "mongoose";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // save the username in the db
 const grabUsername = async (formData) => {
   ("use server");
-
-  const session = getServerSession();
-  console.log(session);
 
   const username = formData.get("username");
   mongoose.connect(process.env.MONGODB_URI);
@@ -23,7 +21,8 @@ const grabUsername = async (formData) => {
     return false;
     // return redirect("/account?usernameTaken=1");
   } else {
-    return await Page.create({ uri: username });
+    const session = await getServerSession(authOptions);
+    return await Page.create({ uri: username, owner: session?.user?.email });
   }
   // const pageDoc = await Page.create({ uri: username });
   // return JSON.parse(JSON.stringify(pageDoc));
