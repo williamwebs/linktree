@@ -1,21 +1,22 @@
 "use server";
 
 import { Page } from "@/models/Page";
-import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import mongoose from "mongoose";
 
 // save the username in the db
 const grabUsername = async (formData) => {
   ("use server");
+
   const session = getServerSession();
+  console.log(session);
+
   const username = formData.get("username");
   mongoose.connect(process.env.MONGODB_URI);
 
   // check db if username already exists
   const existingPageDoc = await Page.findOne({
     uri: username,
-    owner: session?.user.id,
   });
 
   if (existingPageDoc) {

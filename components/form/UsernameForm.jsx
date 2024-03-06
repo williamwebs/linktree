@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 const UsernameForm = ({ username }) => {
   const [taken, setTaken] = useState(false);
 
+
   // handle form submit
   const handleFormSubmit = async (formData) => {
     const result = await grabUsername(formData);

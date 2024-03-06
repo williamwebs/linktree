@@ -8,10 +8,6 @@ const PageSchema = new Schema(
       min: 1,
       unique: true,
     },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
   },
   { timestamps: true }
 );
