@@ -6,7 +6,7 @@ import { Page } from "@/models/Page";
 
 const AccountPage = async ({ searchParams }) => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+  // console.log(session);
   const username = searchParams.username;
 
   // protecting the route
@@ -15,6 +15,7 @@ const AccountPage = async ({ searchParams }) => {
   }
 
   const page = await Page.findOne({ owner: session?.user?.email });
+  console.log(page);
 
   if (page) {
     return <div>Your page is /{page.uri}</div>;

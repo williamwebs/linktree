@@ -10,6 +10,7 @@ const grabUsername = async (formData) => {
   ("use server");
 
   const username = formData.get("username");
+
   mongoose.connect(process.env.MONGODB_URI);
 
   // check db if username already exists
@@ -23,6 +24,7 @@ const grabUsername = async (formData) => {
   } else {
     const session = await getServerSession(authOptions);
     return await Page.create({ uri: username, owner: session?.user?.email });
+    // return redirect("/account/" + username);
   }
   // const pageDoc = await Page.create({ uri: username });
   // return JSON.parse(JSON.stringify(pageDoc));

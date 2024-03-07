@@ -5,7 +5,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export default function Home() {
   const session = getServerSession(authOptions);
-  console.log(session);
+  // console.log(session);
 
   // redirect if there is a session
   if (session) redirect("/account");
