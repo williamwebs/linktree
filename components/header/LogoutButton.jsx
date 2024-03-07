@@ -8,7 +8,7 @@ const LogoutButton = () => {
   return (
     <button
       onClick={signOut}
-      className="flex items-center gap-2 border rounded-full py-2 px-4 shadow-md"
+      className="flex items-center gap-2 border rounded py-2 px-4 shadow-md"
     >
       <span>Logout</span>
       <FontAwesomeIcon icon={faRightFromBracket} />

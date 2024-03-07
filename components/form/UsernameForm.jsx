@@ -15,7 +15,7 @@ const UsernameForm = ({ username }) => {
 
     //   if username is not taken, redirect to account page
     if (result) {
-      redirect("/account?" + formData.get("username"));
+      redirect("/account/" + formData.get("username"));
       // redirect("/account/" + formData.get("username"));
     }
 
