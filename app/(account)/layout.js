@@ -4,6 +4,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChartLine,
+  faFileLines,
+  faGear,
+  faPaperclip,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +31,47 @@ export default async function AppLayout({ children }) {
       <body className={inter.className}>
         <main className="flex min-h-screen">
           <aside className="bg-blue-100 w-48 p-4">
-            aside stuff
-            <div>
+            <div className="border-2 rounded-full w-16 mx-auto overflow-hidden">
               <Image
                 src={session?.user.image}
                 alt={session.user.name}
-                width={64}
-                height={64}
+                width={98}
+                height={98}
+                className="object-contain shadow-lg"
               />
             </div>
+
+            <nav className="flex flex-col gap-4 mt-6 text-center text-gray-500">
+              <Link
+                href={"/my-page"}
+                className="flex items-center gap-4 justify-start border border-white"
+              >
+                <FontAwesomeIcon icon={faFileLines} className="w-4" />
+                <span className="text-gray-700">My Page</span>
+              </Link>
+              <Link
+                href={"/analytics"}
+                className="flex items-center gap-4 justify-start"
+              >
+                <FontAwesomeIcon icon={faChartLine} className="w-4" />
+                <span className="text-gray-700">Analytics</span>
+              </Link>
+              <Link
+                href={"/settings"}
+                className="flex items-center gap-4 justify-start"
+              >
+                <FontAwesomeIcon icon={faGear} className="w-4" />
+                <span className="text-gray-700">Settings</span>{" "}
+              </Link>
+
+              {/* logout button */}
+              <button className="flex items-center gap-4 justify-start">
+                <FontAwesomeIcon icon={faRightFromBracket} className="w-4" />
+                <span>Logout</span>
+              </button>
+            </nav>
           </aside>
-          <div className="max-w-4xl w-full border p-6">{children}</div>
+          <div className="w-full border border-red-700 p-6">{children}</div>
         </main>
       </body>
     </html>
