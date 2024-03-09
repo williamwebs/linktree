@@ -3,8 +3,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const LoginPage = () => {
+  const handleSignIn = () => {
+    signIn("google");
+    return redirect("/account");
+  };
   return (
     <div>
       <div className="max-w-sm mx-auto p-4 border bg-white">
@@ -13,7 +18,7 @@ const LoginPage = () => {
           Sign in to your account using one of the methods below:
         </p>
         <button
-          onClick={() => signIn("google")}
+          onClick={handleSignIn}
           className="bg-blue-500 text-white text-center w-full py-4 flex gap-2 items-center justify-center"
         >
           <FontAwesomeIcon icon={faGoogle} className="w-4" />
