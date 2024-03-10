@@ -11,9 +11,7 @@ const AccountPage = async ({ searchParams }) => {
   const username = searchParams.username;
 
   // protecting the route
-  if (!session) {
-    return redirect("/");
-  }
+  if (!session) redirect("/");
 
   // check if user already has a page created
   mongoose.connect(process.env.MONGODB_URI);

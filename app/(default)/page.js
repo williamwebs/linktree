@@ -8,7 +8,7 @@ export default function Home() {
   // console.log(session);
 
   // redirect if there is a session
-  if (session) redirect("/account");
+  // if (session) redirect("/account");
 
   return (
     <main>
