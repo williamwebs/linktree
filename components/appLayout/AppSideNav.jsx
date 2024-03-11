@@ -20,36 +20,36 @@ const AppSideNav = () => {
   };
 
   return (
-    <nav className="flex flex-col gap-4 mt-10 text-center text-gray-500">
+    <nav className="flex flex-col gap-4 mt-10 text-center text-gray-700">
       <Link
         href={"/account"}
         className={
           "flex items-center gap-4 justify-start " +
-          (isAccountActive() ? "text-blue-500" : "")
+          (isAccountActive() ? "text-blue-500 font-bold" : "")
         }
       >
         <FontAwesomeIcon icon={faFileLines} className="w-4" />
-        <span className="">My Page</span>
+        <span className="text-base">My Page</span>
       </Link>
       <Link
         href={"/analytics"}
         className={
           "flex items-center gap-4 justify-start " +
-          (path === "/analytics" ? "text-blue-500" : "")
+          (path === "/analytics" ? "text-blue-500 font-bold" : "")
         }
       >
         <FontAwesomeIcon icon={faChartLine} className="w-4" />
-        <span className="">Analytics</span>
+        <span className="text-base">Analytics</span>
       </Link>
       <Link
         href={"/settings"}
         className={
           "flex items-center gap-4 justify-start " +
-          (path === "/settings" ? "text-blue-500" : "")
+          (path === "/settings" ? "text-blue-500 font-bold" : "")
         }
       >
         <FontAwesomeIcon icon={faGear} className="w-4" />
-        <span className="">Settings</span>
+        <span className="text-base">Settings</span>
       </Link>
 
       {/* logout button */}
