@@ -1,9 +1,9 @@
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/header/Header";
 import Provider from "@/components/Provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata = {
   title: "Linktree",
@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={lato.className}>
         <Provider>
           <main className="">
             <Header />

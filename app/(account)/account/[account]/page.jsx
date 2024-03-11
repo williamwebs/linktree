@@ -1,11 +1,12 @@
 "use client";
 
+import PageSettingsForm from "@/components/form/PageSettingsForm";
 import { useParams } from "next/navigation";
 
 const Account = () => {
   const url = useParams();
 
-  return <div>AccountPage is:/ {url.account} </div>;
+  return <PageSettingsForm />;
 };
 
 export default Account;

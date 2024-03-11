@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "../globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -7,7 +7,7 @@ import Image from "next/image";
 import Provider from "@/components/Provider";
 import AppSideNav from "@/components/appLayout/AppSideNav";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata = {
   title: "Next.js",
@@ -25,14 +25,14 @@ export default async function AppLayout({ children, ...rest }) {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={lato.className}>
         <Provider>
           <main className="flex min-h-screen">
             <aside className="bg-blue-100 w-48 p-4 shadow">
               <div className="border-2 rounded-full w-16 mx-auto overflow-hidden">
                 <Image
                   src={session?.user.image}
-                  alt={session.user.name}
+                  alt={session?.user.name}
                   width={98}
                   height={98}
                   className="object-contain shadow-lg"

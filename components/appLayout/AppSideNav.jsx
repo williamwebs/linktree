@@ -25,7 +25,7 @@ const AppSideNav = () => {
         href={"/account"}
         className={
           "flex items-center gap-4 justify-start " +
-          (isAccountActive() ? "text-blue-500 font-bold" : "")
+          (isAccountActive() ? "text-blue-500" : "")
         }
       >
         <FontAwesomeIcon icon={faFileLines} className="w-4" />
@@ -35,7 +35,7 @@ const AppSideNav = () => {
         href={"/analytics"}
         className={
           "flex items-center gap-4 justify-start " +
-          (path === "/analytics" ? "text-blue-500 font-bold" : "")
+          (path === "/analytics" ? "text-blue-500" : "")
         }
       >
         <FontAwesomeIcon icon={faChartLine} className="w-4" />
@@ -45,7 +45,7 @@ const AppSideNav = () => {
         href={"/settings"}
         className={
           "flex items-center gap-4 justify-start " +
-          (path === "/settings" ? "text-blue-500 font-bold" : "")
+          (path === "/settings" ? "text-blue-500" : "")
         }
       >
         <FontAwesomeIcon icon={faGear} className="w-4" />
