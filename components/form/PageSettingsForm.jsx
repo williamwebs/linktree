@@ -1,16 +1,17 @@
+import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
+import ButtonToggler from "../formItem/ButtonToggler";
+
 const PageSettingsForm = (page) => {
   return (
     <div>
       <form action="">
-        <div className="bg-gray-300 h-32">
-          <label>
-            <input type="radio" name="bgType" value="color" />
-            <span>Color</span>
-          </label>
-          <label>
-            <input type="radio" name="bgType" value="image" />
-            <span>Image</span>
-          </label>
+        <div className="bg-gray-300 p-16 flex justify-center items-center">
+          <ButtonToggler
+            options={[
+              { value: "color", icon: faPalette, label: "Color" },
+              { value: "image", icon: faImage, label: "Image" },
+            ]}
+          />
         </div>
         <div>avarter</div>
       </form>
