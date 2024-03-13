@@ -6,6 +6,19 @@ body {
   @apply bg-gray-100;
 }
 
+input[type="text"],
+textarea {
+  @apply w-full block bg-gray-100 p-2 mb-2;
+}
+
+textarea {
+  @apply resize-none;
+}
+
+label.input-label {
+  @apply font-semibold text-xs text-gray-500 uppercase mb-2;
+}
+
 .radio-togglers {
   @apply p-1 bg-gray-200 inline-flex;
 }

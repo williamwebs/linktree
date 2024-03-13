@@ -1,17 +1,26 @@
 "use client";
 
-import PageSettingsForm from "@/components/form/PageSettingsForm";
 import ButtonToggler from "@/components/formItem/ButtonToggler";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import mongoose from "mongoose";
+import { Page } from "@/models/Page";
 
-const Account = () => {
+const Account = async () => {
   const { data: session } = useSession();
   console.log(session?.user);
 
   const url = useParams();
+
+  // fetch page details from the database
+
+  // connect to database
+  mongoose.connect(process.env.MONGODB_URI);
+
+  const pageDetails = await Page.findOne({ owner: session?.user?.email });
+  console.log(pageDetails);
 
   return (
     <div>
@@ -24,13 +33,47 @@ const Account = () => {
             ]}
           />
         </div>
-        <div className="max-w-24 -mt-8 mx-auto bg-white rounded-full p-2 shadow">
+        <div className="flex justify-center">
           <Image
             src={session?.user?.image}
             alt="avarter"
-            width={128}
-            height={128}
+            width={100}
+            height={100}
+            className="rounded-full relative -top-8 border-4 border-white shadow-xl "
           />
+        </div>
+        <div className="py-4">
+          <label className="input-label" htmlFor="nameInput">
+            Display name
+          </label>
+          <input
+            type="text"
+            id="nameInput"
+            name="displayName"
+            defaultValue={""}
+            placeholder="John Doe"
+          />
+
+          <label className="input-label" htmlFor="locationInput">
+            Location
+          </label>
+          <input
+            type="text"
+            id="locationInput"
+            name="location"
+            defaultValue={""}
+            placeholder="Somewhere in the world"
+          />
+
+          <label className="input-label" htmlFor="bioInput">
+            Bio
+          </label>
+          <textarea
+            id="bioInput"
+            name="bio"
+            defaultValue={""}
+            placeholder="Your bio goes here..."
+          ></textarea>
         </div>
       </form>
     </div>
