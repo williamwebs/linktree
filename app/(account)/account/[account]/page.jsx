@@ -13,11 +13,12 @@ import { getServerSession } from "next-auth";
 const Account = async () => {
   const session = await getServerSession(authOptions);
 
+  // connect to database
   await mongoose.connect(process.env.MONGODB_URI);
 
   // fetch page details from the database
   const page = await Page.findOne({ owner: session?.user?.email });
-  console.log(page);
+  console.log([page]);
 
   return (
     <div className="border border-red-500">
