@@ -8,7 +8,9 @@ const SubmitButton = ({ children }) => {
     <button
       disabled={pending}
       type="submit"
-      className="w-full p-2 bg-blue-500 disabled:bg-blue-200 disabled:text-gray-400 text-white"
+      className={
+        "w-full py-2 px-4 mx-auto flex gap-2 items-center justify-center bg-blue-500 disabled:bg-blue-200 disabled:text-gray-400 text-white"
+      }
     >
       {pending ? <FontAwesomeIcon icon={faSpinner} /> : children}
     </button>

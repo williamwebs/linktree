@@ -21,7 +21,7 @@ const Account = async () => {
   console.log([page]);
 
   return (
-    <div className="border border-red-500">
+    <div className="">
       <MyPageForm session={session} page={page} />
     </div>
   );

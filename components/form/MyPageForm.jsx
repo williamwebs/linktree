@@ -1,12 +1,18 @@
-"use client";
-
 import ButtonToggler from "../formItem/ButtonToggler";
 import Image from "next/image";
-import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faPalette, faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { savePageSettings } from "@/actions/pageActions";
 
 const MyPageForm = ({ session, page }) => {
+  // save the user data to the database
+  const saveBaseSettings = async (formData) => {
+    "use server";
+    console.log(formData.get("displayName"));
+    await savePageSettings(formData);
+  };
   return (
-    <form action="">
+    <form action={saveBaseSettings}>
       <div className="bg-gray-300 p-16 flex justify-center items-center">
         <ButtonToggler
           options={[
@@ -32,7 +38,7 @@ const MyPageForm = ({ session, page }) => {
           type="text"
           id="nameInput"
           name="displayName"
-          defaultValue={""}
+          defaultValue={page.displayName}
           placeholder="John Doe"
         />
 
@@ -43,7 +49,7 @@ const MyPageForm = ({ session, page }) => {
           type="text"
           id="locationInput"
           name="location"
-          defaultValue={""}
+          defaultValue={page.location}
           placeholder="Somewhere in the world"
         />
 
@@ -53,9 +59,19 @@ const MyPageForm = ({ session, page }) => {
         <textarea
           id="bioInput"
           name="bio"
-          defaultValue={""}
+          defaultValue={page.bio}
           placeholder="Your bio goes here..."
         ></textarea>
+      </div>
+
+      <div className="max-w-sm mx-auto">
+        <button
+          type="submit"
+          className="w-full py-2 px-4 mx-auto flex gap-2 items-center justify-center bg-blue-500 disabled:bg-blue-200 disabled:text-gray-400 text-white"
+        >
+          <FontAwesomeIcon icon={faSave} className="w-4" />
+          <span>Save</span>
+        </button>
       </div>
     </form>
   );
