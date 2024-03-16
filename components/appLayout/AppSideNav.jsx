@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 const AppSideNav = () => {
   const path = usePathname();
-  console.log(path);
+  // console.log(path);
 
   // Function to check if the current path starts with '/account'
   const isAccountActive = () => {

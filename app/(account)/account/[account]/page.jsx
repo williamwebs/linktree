@@ -1,81 +1,27 @@
-"use client";
-
-import ButtonToggler from "@/components/formItem/ButtonToggler";
-import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
-import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
-import mongoose from "mongoose";
+// import ButtonToggler from "@/components/formItem/ButtonToggler";
+// import { useSession } from "next-auth/react";
+// import { useParams } from "next/navigation";
+// import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
+// import Image from "next/image";
+// import { useState } from "react";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import MyPageForm from "@/components/form/MyPageForm";
 import { Page } from "@/models/Page";
+import mongoose from "mongoose";
+import { getServerSession } from "next-auth";
 
 const Account = async () => {
-  const { data: session } = useSession();
-  console.log(session?.user);
+  const session = await getServerSession(authOptions);
 
-  const url = useParams();
+  await mongoose.connect(process.env.MONGODB_URI);
 
   // fetch page details from the database
-
-  // connect to database
-  mongoose.connect(process.env.MONGODB_URI);
-
-  const pageDetails = await Page.findOne({ owner: session?.user?.email });
-  console.log(pageDetails);
+  const page = await Page.findOne({ owner: session?.user?.email });
+  console.log(page);
 
   return (
-    <div>
-      <form action="">
-        <div className="bg-gray-300 p-16 flex justify-center items-center">
-          <ButtonToggler
-            options={[
-              { value: "color", icon: faPalette, label: "Color" },
-              { value: "image", icon: faImage, label: "Image" },
-            ]}
-          />
-        </div>
-        <div className="flex justify-center">
-          <Image
-            src={session?.user?.image}
-            alt="avarter"
-            width={100}
-            height={100}
-            className="rounded-full relative -top-8 border-4 border-white shadow-xl "
-          />
-        </div>
-        <div className="py-4">
-          <label className="input-label" htmlFor="nameInput">
-            Display name
-          </label>
-          <input
-            type="text"
-            id="nameInput"
-            name="displayName"
-            defaultValue={""}
-            placeholder="John Doe"
-          />
-
-          <label className="input-label" htmlFor="locationInput">
-            Location
-          </label>
-          <input
-            type="text"
-            id="locationInput"
-            name="location"
-            defaultValue={""}
-            placeholder="Somewhere in the world"
-          />
-
-          <label className="input-label" htmlFor="bioInput">
-            Bio
-          </label>
-          <textarea
-            id="bioInput"
-            name="bio"
-            defaultValue={""}
-            placeholder="Your bio goes here..."
-          ></textarea>
-        </div>
-      </form>
+    <div className="border border-red-500">
+      <MyPageForm session={session} page={page} />
     </div>
   );
 };

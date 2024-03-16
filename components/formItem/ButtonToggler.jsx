@@ -4,7 +4,7 @@ const ButtonToggler = ({ options }) => {
   return (
     <div className="radio-togglers shadow">
       {options.map((i) => (
-        <label>
+        <label key={i.label}>
           <input type="radio" name="bgType" value={i.value} />
           <span className="flex items-center">
             <FontAwesomeIcon icon={i.icon} className="w-4 mr-1" />
