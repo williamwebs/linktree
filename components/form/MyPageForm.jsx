@@ -1,15 +1,17 @@
+"use client";
+
 import ButtonToggler from "../formItem/ButtonToggler";
 import Image from "next/image";
 import { faImage, faPalette, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SubmitButton from "../buttons/SubmitButton";
 import { savePageSettings } from "@/actions/pageActions";
 
 const MyPageForm = ({ session, page }) => {
   // save the user data to the database
   const saveBaseSettings = async (formData) => {
-    "use server";
     console.log(formData.get("displayName"));
-    await savePageSettings(formData);
+    const result = await savePageSettings(formData);
   };
   return (
     <form action={saveBaseSettings}>
@@ -65,13 +67,10 @@ const MyPageForm = ({ session, page }) => {
       </div>
 
       <div className="max-w-sm mx-auto">
-        <button
-          type="submit"
-          className="w-full py-2 px-4 mx-auto flex gap-2 items-center justify-center bg-blue-500 disabled:bg-blue-200 disabled:text-gray-400 text-white"
-        >
+        <SubmitButton>
           <FontAwesomeIcon icon={faSave} className="w-4" />
           <span>Save</span>
-        </button>
+        </SubmitButton>
       </div>
     </form>
   );
