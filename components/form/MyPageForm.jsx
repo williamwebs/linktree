@@ -20,6 +20,25 @@ const MyPageForm = ({ session, page }) => {
     // show toast message when saved successfully
     if (result) toast.success("Saved!");
   };
+
+  // upload background image
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const data = new FormData();
+      data.set("file", file);
+      fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      }).then((response) => {
+        response.json().then((link) => {
+          console.log(link);
+        });
+      });
+    }
+  };
+
   return (
     <form action={saveBaseSettings}>
       <div
@@ -48,6 +67,20 @@ const MyPageForm = ({ session, page }) => {
                   defaultValue={page.bgColor}
                 />
               </div>
+            </div>
+          )}
+
+          {/* display when image is selected */}
+          {bgType === "image" && (
+            <div className="flex justify-center">
+              <label className="bg-gray-200 py-1 px-4 mt-2 text-gray-700 cursor-pointer">
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+                Change image
+              </label>
             </div>
           )}
         </div>
