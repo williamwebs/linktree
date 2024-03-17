@@ -12,7 +12,7 @@ const SubmitButton = ({ children }) => {
         "w-full py-2 px-4 mx-auto flex gap-2 items-center justify-center bg-blue-500 disabled:bg-blue-200 disabled:text-gray-400 text-white"
       }
     >
-      {pending ? <FontAwesomeIcon icon={faSpinner} /> : children}
+      {pending ? <FontAwesomeIcon icon={faSpinner} spin /> : children}
     </button>
   );
 };

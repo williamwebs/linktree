@@ -6,22 +6,45 @@ import { faImage, faPalette, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SubmitButton from "../buttons/SubmitButton";
 import { savePageSettings } from "@/actions/pageActions";
+import toast from "react-hot-toast";
 
 const MyPageForm = ({ session, page }) => {
   // save the user data to the database
   const saveBaseSettings = async (formData) => {
-    console.log(formData.get("displayName"));
     const result = await savePageSettings(formData);
+
+    // show toast message when saved successfully
+    if (result) toast.success("Saved!");
   };
   return (
     <form action={saveBaseSettings}>
-      <div className="bg-gray-300 p-16 flex justify-center items-center">
-        <ButtonToggler
-          options={[
-            { value: "color", icon: faPalette, label: "Color" },
-            { value: "image", icon: faImage, label: "Image" },
-          ]}
-        />
+      <div
+        style={{ backgroundColor: page.bgColor }}
+        className="p-16 flex justify-center items-center"
+      >
+        <div>
+          <ButtonToggler
+            defaultValue={page.bgType}
+            options={[
+              { value: "color", icon: faPalette, label: "Color" },
+              { value: "image", icon: faImage, label: "Image" },
+            ]}
+          />
+
+          {/* show only when color is selected */}
+          <div className="bg-gray-200 shadow p-1 text-gray-700 mt-2">
+            {page.bgType === "color" && (
+              <div className="flex gap-2 items-center justify-center">
+                <span>Background color:</span>
+                <input
+                  type="color"
+                  name="bgColor"
+                  defaultValue={page.bgColor}
+                />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
       <div className="flex justify-center">
         <Image

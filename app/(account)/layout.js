@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Provider from "@/components/Provider";
 import AppSideNav from "@/components/appLayout/AppSideNav";
+import { Toaster } from "react-hot-toast";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -27,6 +28,7 @@ export default async function AppLayout({ children, ...rest }) {
     <html lang="en">
       <body className={lato.className}>
         <Provider>
+          <Toaster />
           <main className="flex min-h-screen">
             <aside className="bg-blue-100 w-48 p-4 shadow">
               <div className="border-2 rounded-full w-16 mx-auto overflow-hidden">
