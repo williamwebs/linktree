@@ -7,8 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SubmitButton from "../buttons/SubmitButton";
 import { savePageSettings } from "@/actions/pageActions";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const MyPageForm = ({ session, page }) => {
+  const [bgType, setBgType] = useState(page.bgType);
+  const [bgColor, setBgColor] = useState(page.bgColor);
+
   // save the user data to the database
   const saveBaseSettings = async (formData) => {
     const result = await savePageSettings(formData);
@@ -19,7 +23,7 @@ const MyPageForm = ({ session, page }) => {
   return (
     <form action={saveBaseSettings}>
       <div
-        style={{ backgroundColor: page.bgColor }}
+        style={{ backgroundColor: bgColor }}
         className="p-16 flex justify-center items-center"
       >
         <div>
@@ -29,21 +33,23 @@ const MyPageForm = ({ session, page }) => {
               { value: "color", icon: faPalette, label: "Color" },
               { value: "image", icon: faImage, label: "Image" },
             ]}
+            onChange={(val) => setBgType(val)}
           />
 
           {/* show only when color is selected */}
-          <div className="bg-gray-200 shadow p-1 text-gray-700 mt-2">
-            {page.bgType === "color" && (
+          {bgType === "color" && (
+            <div className="bg-gray-200 shadow p-1 text-gray-700 mt-2">
               <div className="flex gap-2 items-center justify-center">
                 <span>Background color:</span>
                 <input
                   type="color"
                   name="bgColor"
+                  onChange={(e) => setBgColor(e.target.value)}
                   defaultValue={page.bgColor}
                 />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex justify-center">
